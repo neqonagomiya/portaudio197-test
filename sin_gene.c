@@ -1,4 +1,4 @@
-#generate sin wave
+/*generate sin wave*/
 #include <stdio.h>
 #include <math.h>
 #include "portaudio.h"
@@ -50,7 +50,7 @@ static int patestCallback( const void *inputBuffer, void *outputBuffer,
 static void StreamFinished( void* userData)
 {
   paTestData *data = (paTestData *) userData;
-  print( "Stream Completed: %s\n", data->message );
+  printf( "Stream Completed: %s\n", data->message );
 }
 
 /************************************************************************************/
@@ -58,7 +58,7 @@ int main(void);
 int main(void){
   PaStreamParameters outputParameters;
   PaStream *stream;
-  paError err;
+  PaError err;
   paTestData data;
   int i;
   int NUM_SECONDS;
@@ -90,8 +90,8 @@ int main(void){
   outputParameters.hostApiSpecificStreamInfo = NULL;
 
   err = Pa_OpenStream(
-		&stream;
-		NULL; /*No Input*/
+		&stream,
+		NULL, /*No Input*/
 		&outputParameters,
 		SAMPLE_RATE,
 		FRAMES_PER_BUFFER,
@@ -108,7 +108,7 @@ int main(void){
   if(err != paNoError) goto error;
 
   printf("Play for %d seconds.\n", NUM_SECONDS);
-  Pa_Sleep( NUMSECONDS * 1000);
+  Pa_Sleep( NUM_SECONDS * 1000);
 
   err = Pa_StopStream(stream);
   if(err != paNoError) goto error;
